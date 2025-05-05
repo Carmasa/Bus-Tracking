@@ -17,8 +17,8 @@ public class RegistrarDatos {
         LocalDateTime iniciarTiempo = LocalDateTime.now();
 
         for (String busId : AUTOBUSES) {
-            double lat = 19.4;
-            double lon = -99.1;
+            double lat = 37;
+            double lon = -6;
             for (int i = 0; i < MINUTOS; i++) {
                 LocalDateTime timestamp = iniciarTiempo.plusMinutes(i);
                 double speed = rand.nextBoolean() ? rand.nextDouble() * 60 : 0.0;
