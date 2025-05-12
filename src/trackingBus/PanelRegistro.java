@@ -2,7 +2,6 @@ package trackingBus;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
@@ -12,8 +11,10 @@ import java.util.stream.Collectors;
 public class PanelRegistro extends JPanel {
     private Image background;
     private JTextArea textArea;
+    private Ventana ventana;
 
     public PanelRegistro(Ventana ventana) {
+        this.ventana = ventana;
         setLayout(null);
 
         // Cargar fondo
@@ -24,7 +25,7 @@ public class PanelRegistro extends JPanel {
 
         // Botón atrás
         JButton botonAtras = new JButton("Volver");
-        botonAtras.setBounds(880, 650, 120, 40);
+        botonAtras.setBounds(880, 600, 120, 40);
         botonAtras.setContentAreaFilled(true);
         botonAtras.addActionListener(e -> ventana.cambiarPanel("PanelRuta"));
         add(botonAtras);
@@ -33,21 +34,24 @@ public class PanelRegistro extends JPanel {
         textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(60, 150, 400, 400);
-        textArea.setOpaque(false); // fondo transparente
-        textArea.setBackground(new Color(0, 0, 0, 0)); // asegura que no pinte ningún fondo
+        scrollPane.setBounds(60, 150, 550, 400);
+        textArea.setOpaque(false);
+        textArea.setBackground(new Color(0, 0, 0, 0));
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
-        textArea.setFont(new Font("SansSerif", Font.BOLD, 14)); // negrita
-
+        textArea.setFont(new Font("SansSerif", Font.BOLD, 14));
         add(scrollPane);
-
-        // Cargar y mostrar datos
-        mostrarUltimosRegistros();
     }
 
-    private void mostrarUltimosRegistros() {
-        File archivo = new File("gps_data.csv"); // Ruta relativa al proyecto
+    // Este método debe llamarse cada vez que se entra en el panel
+    public void actualizarRegistros() {
+        String lineaSeleccionada = ventana.getLineaSeleccionada();
+        if (lineaSeleccionada == null || lineaSeleccionada.isEmpty()) {
+            textArea.setText("No se ha especificado una línea de autobús.");
+            return;
+        }
+
+        File archivo = new File("gps_data.csv");
         if (!archivo.exists()) {
             textArea.setText("Archivo gps_data.csv no encontrado.");
             return;
@@ -57,7 +61,7 @@ public class PanelRegistro extends JPanel {
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                if (linea.startsWith("BUS-027")) {
+                if (linea.startsWith(lineaSeleccionada)) {
                     coincidencias.add(linea);
                 }
             }
@@ -66,16 +70,13 @@ public class PanelRegistro extends JPanel {
             return;
         }
 
-        // Obtener las últimas 5 líneas
         List<String> ultimas5 = coincidencias.stream()
                 .skip(Math.max(0, coincidencias.size() - 5))
                 .collect(Collectors.toList());
 
-        // Mostrar en el área de texto
-        StringBuilder sb = new StringBuilder("Últimos 5 registros de BUS-027:\n\n");
-        for (String linea : ultimas5) {
-            sb.append(linea).append("\n");
-            sb.append(linea).append("\n");
+        StringBuilder sb = new StringBuilder("Últimos 5 registros de BUS-" + lineaSeleccionada + ":\n\n");
+        for (String registro : ultimas5) {
+            sb.append(registro).append("\n");
         }
         textArea.setText(sb.toString());
     }

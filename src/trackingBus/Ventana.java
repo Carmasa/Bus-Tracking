@@ -9,6 +9,7 @@ import java.io.IOException;
 public class Ventana extends JFrame {
     private CardLayout cardLayout;
     private JPanel panelContenedor;
+    private String lineaSeleccionada;
 
     public Ventana() {
 
@@ -37,6 +38,26 @@ public class Ventana extends JFrame {
     }
 
     public void cambiarPanel(String nombrePanel) {
+        if (nombrePanel.equals("PanelRuta")) {
+            for (Component comp : panelContenedor.getComponents()) {
+                if (comp instanceof PanelRuta) {
+                    ((PanelRuta) comp).actualizarParadas();
+                }
+            }
+        } else if (nombrePanel.equals("PanelRegistro")) {
+            for (Component comp : panelContenedor.getComponents()) {
+                if (comp instanceof PanelRegistro) {
+                    ((PanelRegistro) comp).actualizarRegistros();
+                }
+            }
+        }
         cardLayout.show(panelContenedor, nombrePanel);
+    }
+    public void setLineaSeleccionada(String linea) {
+        this.lineaSeleccionada = linea;
+    }
+
+    public String getLineaSeleccionada() {
+        return lineaSeleccionada;
     }
 }

@@ -21,24 +21,30 @@ public class PanelInicio extends JPanel {
         }
 
         // Botón ruta 1
-        JButton botonruta1 = new JButton("ruta1");
-        botonruta1.setBounds(45, 75, 130, 30);
-        botonruta1.setContentAreaFilled(true);
-        botonruta1.addActionListener(e -> ventana.cambiarPanel("PanelRuta"));
+        JButton botonruta1 = new JButton("Linea 27");
+        botonruta1.setBounds(40, 75, 130, 30);
+        botonruta1.setContentAreaFilled(false);
+        botonruta1.addActionListener(e -> {
+            ventana.setLineaSeleccionada("BUS-027");
+            ventana.cambiarPanel("PanelRuta");});
         add(botonruta1);
 
         // Botón ruta 2
-        JButton botonruta2 = new JButton("ruta2");
-        botonruta2.setBounds(45, 140, 130, 30);
-        botonruta2.setContentAreaFilled(true);
-        botonruta2.addActionListener(e -> ventana.cambiarPanel("PanelRuta"));
+        JButton botonruta2 = new JButton("Linea 29");
+        botonruta2.setBounds(40, 140, 130, 30);
+        botonruta2.setContentAreaFilled(false);
+        botonruta2.addActionListener(e -> {
+            ventana.setLineaSeleccionada("BUS-029");
+            ventana.cambiarPanel("PanelRuta");});
         add(botonruta2);
 
         // Botón ruta 3
-        JButton botonruta3 = new JButton("ruta3");
-        botonruta3.setBounds(45, 210, 130, 30);
-        botonruta3.setContentAreaFilled(true);
-        botonruta3.addActionListener(e -> ventana.cambiarPanel("PanelRuta"));
+        JButton botonruta3 = new JButton("Linea C1");
+        botonruta3.setBounds(40, 210, 130, 30);
+        botonruta3.setContentAreaFilled(false);
+        botonruta3.addActionListener(e -> {
+            ventana.setLineaSeleccionada("BUS-C1");
+            ventana.cambiarPanel("PanelRuta");});
         add(botonruta3);
 
         // Botón salir
