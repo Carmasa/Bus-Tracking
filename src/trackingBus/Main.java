@@ -8,8 +8,8 @@ public class Main {
 
         try {
             RegistrarDatos.generarArchivo(nombreArchivo);
-
             ArrayList<GPSData> dataList = ObtenerDatos.leerArchivo(nombreArchivo);
+
 
             AnalizarDatos.analizar(dataList);
         } catch (Exception e) {

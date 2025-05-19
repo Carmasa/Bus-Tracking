@@ -1,5 +1,5 @@
 package trackingBus;
-
+//Clase que  representa una coordenada geográfica con latitud y longitud.
 public class Coordenada {
     private double latitud;
     private double longitud;

@@ -23,10 +23,47 @@ public class PanelRegistro extends JPanel {
             background = new ImageIcon(backgroundUrl).getImage();
         }
 
+        // Botón ruta 1
+        JButton botonruta1 = new JButton("Linea 27");
+        botonruta1.setBounds(792, 175, 130, 30);
+        botonruta1.setFont(new Font("SansSerif", Font.BOLD, 20));
+        botonruta1.setContentAreaFilled(false);
+        botonruta1.addActionListener(e -> {
+            ventana.setLineaSeleccionada("BUS-027");
+            ventana.cambiarPanel("PanelRegistro");});
+        add(botonruta1);
+
+        // Botón ruta 2
+        JButton botonruta2 = new JButton("Linea 29");
+        botonruta2.setBounds(792, 240, 130, 30);
+        botonruta2.setFont(new Font("SansSerif", Font.BOLD, 20));
+        botonruta2.setContentAreaFilled(false);
+        botonruta2.addActionListener(e -> {
+            ventana.setLineaSeleccionada("BUS-029");
+            ventana.cambiarPanel("PanelRegistro");});
+        add(botonruta2);
+
+        // Botón ruta 3
+        JButton botonruta3 = new JButton("Linea C1");
+        botonruta3.setBounds(792, 300, 130, 30);
+        botonruta3.setFont(new Font("SansSerif", Font.BOLD, 20));
+        botonruta3.setContentAreaFilled(false);
+        botonruta3.addActionListener(e -> {
+            ventana.setLineaSeleccionada("BUS-C1");
+            ventana.cambiarPanel("PanelRegistro");});
+        add(botonruta3);
+
+        // Botón salir
+        JButton botonsalir = new JButton("Salir");
+        botonsalir.setBounds(845, 615, 100, 30);
+        botonsalir.setContentAreaFilled(false);
+        botonsalir.addActionListener(e -> System.exit(0));
+        add(botonsalir);
+
         // Botón atrás
         JButton botonAtras = new JButton("Volver");
-        botonAtras.setBounds(880, 600, 120, 40);
-        botonAtras.setContentAreaFilled(true);
+        botonAtras.setBounds(845, 565, 100, 30);
+        botonAtras.setContentAreaFilled(false);
         botonAtras.addActionListener(e -> ventana.cambiarPanel("PanelRuta"));
         add(botonAtras);
 
@@ -34,7 +71,7 @@ public class PanelRegistro extends JPanel {
         textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(60, 150, 550, 400);
+        scrollPane.setBounds(60, 150, 620, 400);
         textArea.setOpaque(false);
         textArea.setBackground(new Color(0, 0, 0, 0));
         scrollPane.setOpaque(false);
@@ -63,6 +100,7 @@ public class PanelRegistro extends JPanel {
             while ((linea = br.readLine()) != null) {
                 if (linea.startsWith(lineaSeleccionada)) {
                     coincidencias.add(linea);
+
                 }
             }
         } catch (IOException e) {
@@ -74,10 +112,9 @@ public class PanelRegistro extends JPanel {
                 .skip(Math.max(0, coincidencias.size() - 5))
                 .collect(Collectors.toList());
 
-        StringBuilder sb = new StringBuilder("Últimos 5 registros de BUS-" + lineaSeleccionada + ":\n\n");
+        StringBuilder sb = new StringBuilder(lineaSeleccionada + ":\n\n");
         for (String registro : ultimas5) {
-            sb.append(registro).append("\n");
-        }
+            sb.append(registro).append("\n\n");        }
         textArea.setText(sb.toString());
     }
 

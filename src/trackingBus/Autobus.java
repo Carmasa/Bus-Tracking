@@ -2,7 +2,9 @@ package trackingBus;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Representa un autobús con su nombre, paradas y coordenadas.
+ */
 public class Autobus {
     private String nombre;
     private List<String> paradas;

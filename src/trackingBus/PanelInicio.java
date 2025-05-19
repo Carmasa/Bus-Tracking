@@ -23,6 +23,7 @@ public class PanelInicio extends JPanel {
         // Botón ruta 1
         JButton botonruta1 = new JButton("Linea 27");
         botonruta1.setBounds(40, 75, 130, 30);
+        botonruta1.setFont(new Font("SansSerif", Font.BOLD, 20));
         botonruta1.setContentAreaFilled(false);
         botonruta1.addActionListener(e -> {
             ventana.setLineaSeleccionada("BUS-027");
@@ -32,6 +33,7 @@ public class PanelInicio extends JPanel {
         // Botón ruta 2
         JButton botonruta2 = new JButton("Linea 29");
         botonruta2.setBounds(40, 140, 130, 30);
+        botonruta2.setFont(new Font("SansSerif", Font.BOLD, 20));
         botonruta2.setContentAreaFilled(false);
         botonruta2.addActionListener(e -> {
             ventana.setLineaSeleccionada("BUS-029");
@@ -40,7 +42,8 @@ public class PanelInicio extends JPanel {
 
         // Botón ruta 3
         JButton botonruta3 = new JButton("Linea C1");
-        botonruta3.setBounds(40, 210, 130, 30);
+        botonruta3.setBounds(40, 205, 130, 30);
+        botonruta3.setFont(new Font("SansSerif", Font.BOLD, 20));
         botonruta3.setContentAreaFilled(false);
         botonruta3.addActionListener(e -> {
             ventana.setLineaSeleccionada("BUS-C1");
@@ -49,8 +52,8 @@ public class PanelInicio extends JPanel {
 
         // Botón salir
         JButton botonsalir = new JButton("Salir");
-        botonsalir.setBounds(900, 550, 30, 30);
-        botonsalir.setContentAreaFilled(true);
+        botonsalir.setBounds(820, 580, 120, 40);
+        botonruta3.setContentAreaFilled(false);
         botonsalir.addActionListener(e -> System.exit(0));
         add(botonsalir);
     }
